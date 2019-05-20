@@ -9,13 +9,14 @@ namespace Spryker\Client\PersistentCart\QuoteStorageSynchronizer;
 
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteSyncRequestTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface;
 use Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface;
 use Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface;
 use Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface;
 use Spryker\Shared\Quote\QuoteConfig;
 
-class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
+class CustomerQuoteCleaner implements CustomerQuoteCleanerInterface
 {
     /**
      * @var \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface
@@ -60,20 +61,18 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
      *
      * @return void
      */
-    public function syncQuoteForCustomer(CustomerTransfer $customerTransfer): void
+    public function reloadQuoteForCustomer(CustomerTransfer $customerTransfer): void
     {
+        $this->quoteClient->setQuote(new QuoteTransfer());
+
         if ($this->quoteClient->getStorageStrategy() !== QuoteConfig::STORAGE_STRATEGY_DATABASE) {
             return;
         }
 
-        $quoteTransfer = $this->quoteClient->getQuote();
-        if ($quoteTransfer->getCustomer() || $quoteTransfer->getCustomerReference()) {
-            return;
-        }
+        $quoteSyncRequestTransfer = (new QuoteSyncRequestTransfer())
+            ->setQuoteTransfer(new QuoteTransfer())
+            ->setCustomerTransfer($customerTransfer);
 
-        $quoteSyncRequestTransfer = new QuoteSyncRequestTransfer();
-        $quoteSyncRequestTransfer->setQuoteTransfer($quoteTransfer);
-        $quoteSyncRequestTransfer->setCustomerTransfer($customerTransfer);
         $quoteResponseTransfer = $this->persistentCartStub->syncStorageQuote($quoteSyncRequestTransfer);
 
         if (!$quoteResponseTransfer->getIsSuccessful()) {
