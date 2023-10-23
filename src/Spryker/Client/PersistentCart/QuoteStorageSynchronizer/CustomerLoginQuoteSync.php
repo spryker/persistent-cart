@@ -124,7 +124,7 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
      */
     protected function isDatabaseStorageStrategy(string $strategyName): bool
     {
-        return $strategyName !== static::STORAGE_STRATEGY_DATABASE;
+        return $strategyName === static::STORAGE_STRATEGY_DATABASE;
     }
 
     /**
