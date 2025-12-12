@@ -23,4 +23,9 @@ class PersistentCartConfig extends AbstractBundleConfig
     {
         return $this->getSharedConfig()->getPersistentCartAnonymousPrefix();
     }
+
+    public function isQuoteUpdatePluginsInsideCartEnabled(): bool
+    {
+        return $this->getSharedConfig()->isQuoteUpdatePluginsInsideCartEnabled();
+    }
 }

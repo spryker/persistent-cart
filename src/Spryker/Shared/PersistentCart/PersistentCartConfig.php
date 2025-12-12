@@ -18,6 +18,8 @@ class PersistentCartConfig extends AbstractBundleConfig
      */
     protected const PERSISTENT_CART_ANONYMOUS_PREFIX = 'anonymous:';
 
+    protected const bool IS_QUOTE_UPDATE_PLUGINS_INSIDE_CART_ENABLED = false;
+
     /**
      * @api
      *
@@ -26,5 +28,20 @@ class PersistentCartConfig extends AbstractBundleConfig
     public function getPersistentCartAnonymousPrefix(): string
     {
         return static::PERSISTENT_CART_ANONYMOUS_PREFIX;
+    }
+
+    /**
+     * Specification:
+     * - Determines whether separate quote update plugins should be used for cart operations.
+     * - When enabled, uses dedicated plugins for inside-cart operations instead of default quote update plugins.
+     * - Affects both client and Zed layer quote processing within cart context.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isQuoteUpdatePluginsInsideCartEnabled(): bool
+    {
+        return static::IS_QUOTE_UPDATE_PLUGINS_INSIDE_CART_ENABLED;
     }
 }

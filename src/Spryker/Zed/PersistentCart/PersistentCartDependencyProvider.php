@@ -51,6 +51,8 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_QUOTE_RESPONSE_EXPANDER = 'PLUGINS_QUOTE_RESPONSE_EXPANDER';
 
+    public const string PLUGINS_QUOTE_RESPONSE_EXPANDER_FOR_INSIDE_CART_OPERATIONS = 'PLUGINS_QUOTE_RESPONSE_EXPANDER_FOR_INSIDE_CART_OPERATIONS';
+
     /**
      * @var string
      */
@@ -81,6 +83,7 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addQuoteFacade($container);
         $container = $this->addStoreFacade($container);
         $container = $this->addQuoteResponseExpanderPlugins($container);
+        $container = $this->addQuoteResponseExpanderPluginsForInsideCartOperations($container);
         $container = $this->addRemoveItemsRequestExpanderPlugins($container);
         $container = $this->addCartAddItemStrategyPlugins($container);
         $container = $this->addQuotePostMergePlugins($container);
@@ -185,6 +188,19 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
+    protected function addQuoteResponseExpanderPluginsForInsideCartOperations(Container $container): Container
+    {
+        $container->set(static::PLUGINS_QUOTE_RESPONSE_EXPANDER_FOR_INSIDE_CART_OPERATIONS, function (Container $container) {
+            if ($this->getConfig()->isQuoteUpdatePluginsInsideCartEnabled()) {
+                return $this->getQuoteResponseExpanderPluginsForInsideCartOperations();
+            }
+
+            return $this->getQuoteResponseExpanderPlugins();
+        });
+
+        return $container;
+    }
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
@@ -239,6 +255,14 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
      * @return array<\Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteResponseExpanderPluginInterface>
      */
     protected function getQuoteResponseExpanderPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteResponseExpanderPluginInterface>
+     */
+    protected function getQuoteResponseExpanderPluginsForInsideCartOperations(): array
     {
         return [];
     }

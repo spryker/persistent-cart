@@ -174,7 +174,7 @@ class PersistentCartFacade extends AbstractFacade implements PersistentCartFacad
      */
     public function validateQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
-        return $this->getFactory()->createCartOperation()->validate($quoteTransfer);
+        return $this->getFactory()->createCartOperationForValidation()->validate($quoteTransfer);
     }
 
     /**

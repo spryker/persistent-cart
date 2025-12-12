@@ -59,7 +59,7 @@ class PersistentCartFactory extends AbstractFactory
         return new QuoteUpdater(
             $this->getQuoteClient(),
             $this->createZedPersistentCartStub(),
-            $this->createQuoteUpdatePluginExecutor(),
+            $this->createQuoteUpdatePluginExecutorForInsideCartOperations(),
         );
     }
 
@@ -128,6 +128,11 @@ class PersistentCartFactory extends AbstractFactory
         return new QuoteUpdatePluginExecutor($this->getQuoteUpdatePlugins());
     }
 
+    public function createQuoteUpdatePluginExecutorForInsideCartOperations(): QuoteUpdatePluginExecutorInterface
+    {
+        return new QuoteUpdatePluginExecutor($this->getQuoteUpdatePluginsForInsideCartOperations());
+    }
+
     /**
      * @return \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\ChangeRequestExtendPluginExecutorInterface
      */
@@ -158,7 +163,7 @@ class PersistentCartFactory extends AbstractFactory
         return new CustomerQuoteCleaner(
             $this->createZedPersistentCartStub(),
             $this->getQuoteClient(),
-            $this->createQuoteUpdatePluginExecutor(),
+            $this->createQuoteUpdatePluginExecutorForInsideCartOperations(),
             $this->getZedRequestClient(),
         );
     }
@@ -169,6 +174,14 @@ class PersistentCartFactory extends AbstractFactory
     protected function getQuoteUpdatePlugins(): array
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGINS_QUOTE_UPDATE);
+    }
+
+    /**
+     * @return array<\Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuoteUpdatePluginInterface>
+     */
+    protected function getQuoteUpdatePluginsForInsideCartOperations(): array
+    {
+        return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGINS_QUOTE_UPDATE_FOR_INSIDE_CART_OPERATIONS);
     }
 
     /**

@@ -48,9 +48,21 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
     {
         return new CartOperation(
             $this->getQuoteItemFinderPlugin(),
-            $this->createQuoteResponseExpander(),
+            $this->createQuoteResponseExpanderForForInsideCartOperations(),
             $this->createQuoteResolver(),
             $this->createQuoteItemOperation(),
+            $this->getQuoteFacade(),
+            $this->getQuotePostMergePlugins(),
+        );
+    }
+
+    public function createCartOperationForValidation(): CartOperationInterface
+    {
+        return new CartOperation(
+            $this->getQuoteItemFinderPlugin(),
+            $this->createQuoteResponseExpander(),
+            $this->createQuoteResolver(),
+            $this->createQuoteItemOperationForValidation(),
             $this->getQuoteFacade(),
             $this->getQuotePostMergePlugins(),
         );
@@ -78,6 +90,17 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
             $this->getCartFacade(),
             $this->getQuoteFacade(),
             $this->createCartChangeRequestExpander(),
+            $this->createQuoteResponseExpanderForForInsideCartOperations(),
+            $this->getMessengerFacade(),
+        );
+    }
+
+    public function createQuoteItemOperationForValidation(): QuoteItemOperationInterface
+    {
+        return new QuoteItemOperation(
+            $this->getCartFacade(),
+            $this->getQuoteFacade(),
+            $this->createCartChangeRequestExpander(),
             $this->createQuoteResponseExpander(),
             $this->getMessengerFacade(),
         );
@@ -90,7 +113,7 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
     {
         return new QuoteResolver(
             $this->getQuoteFacade(),
-            $this->createQuoteResponseExpander(),
+            $this->createQuoteResponseExpanderForForInsideCartOperations(),
             $this->getMessengerFacade(),
             $this->getStoreFacade(),
             $this->getConfig(),
@@ -146,6 +169,13 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
+    public function createQuoteResponseExpanderForForInsideCartOperations(): QuoteResponseExpanderInterface
+    {
+        return new QuoteResponseExpander(
+            $this->getQuoteResponseExpanderPluginsForInsideCartOperations(),
+        );
+    }
+
     /**
      * @return \Spryker\Zed\PersistentCart\Business\Model\CartChangeRequestExpanderInterface
      */
@@ -175,7 +205,7 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
             $this->getCartFacade(),
             $this->createQuoteResolver(),
             $this->getQuoteFacade(),
-            $this->createQuoteResponseExpander(),
+            $this->createQuoteResponseExpanderForForInsideCartOperations(),
         );
     }
 
@@ -244,6 +274,14 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
     protected function getQuoteResponseExpanderPlugins(): array
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGINS_QUOTE_RESPONSE_EXPANDER);
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteResponseExpanderPluginInterface>
+     */
+    protected function getQuoteResponseExpanderPluginsForInsideCartOperations(): array
+    {
+        return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGINS_QUOTE_RESPONSE_EXPANDER_FOR_INSIDE_CART_OPERATIONS);
     }
 
     /**

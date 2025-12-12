@@ -45,6 +45,8 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
      */
     public const PLUGINS_QUOTE_UPDATE = 'PLUGINS_QUOTE_UPDATE';
 
+    public const string PLUGINS_QUOTE_UPDATE_FOR_INSIDE_CART_OPERATIONS = 'PLUGINS_QUOTE_UPDATE_FOR_INSIDE_CART_OPERATIONS';
+
     /**
      * @var string
      */
@@ -60,6 +62,7 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         $container = $this->addCustomerClient($container);
         $container = $this->addQuoteClient($container);
         $container = $this->addQuoteUpdatePlugins($container);
+        $container = $this->addQuoteUpdatePluginsForInsideCartOperations($container);
         $container = $this->addQuotePersistPlugin($container);
         $container = $this->addChangeRequestExtendPlugins($container);
         $container = $this->addZedRequestClient($container);
@@ -123,6 +126,19 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
+    protected function addQuoteUpdatePluginsForInsideCartOperations(Container $container): Container
+    {
+        $container->set(static::PLUGINS_QUOTE_UPDATE_FOR_INSIDE_CART_OPERATIONS, function (Container $container) {
+            if ($this->getConfig()->isQuoteUpdatePluginsInsideCartEnabled()) {
+                return $this->getQuoteUpdatePluginsForInsideCartOperations();
+            }
+
+            return $this->getQuoteUpdatePlugins();
+        });
+
+        return $container;
+    }
+
     /**
      * @param \Spryker\Client\Kernel\Container $container
      *
@@ -155,6 +171,14 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
      * @return array<\Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuoteUpdatePluginInterface>
      */
     protected function getQuoteUpdatePlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<\Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuoteUpdatePluginInterface>
+     */
+    protected function getQuoteUpdatePluginsForInsideCartOperations(): array
     {
         return [];
     }
