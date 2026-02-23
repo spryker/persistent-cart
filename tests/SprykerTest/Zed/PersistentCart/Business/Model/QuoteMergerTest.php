@@ -127,14 +127,12 @@ class QuoteMergerTest extends Unit
     /**
      * @param \Spryker\Zed\Kernel\AbstractBundleConfig|\PHPUnit\Framework\MockObject\MockObject|null $config
      *
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\PersistentCart\Business\PersistentCartBusinessFactory
+     * @return \Spryker\Zed\PersistentCart\Business\PersistentCartBusinessFactory
      */
     protected function createPersistentCartBusinessFactoryMock(?AbstractBundleConfig $config = null): PersistentCartBusinessFactory
     {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\PersistentCart\Business\PersistentCartBusinessFactory $mockObject */
-        $mockObject = $this->getMockBuilder(PersistentCartBusinessFactory::class)
-            ->enableProxyingToOriginalMethods()
-            ->getMock();
+        /** @var \Spryker\Zed\PersistentCart\Business\PersistentCartBusinessFactory $mockObject */
+        $mockObject = $this->tester->getFactory();
 
         if ($config !== null) {
             $mockObject->setConfig($config);
