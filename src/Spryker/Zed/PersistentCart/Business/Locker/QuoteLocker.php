@@ -39,12 +39,6 @@ class QuoteLocker implements QuoteLockerInterface
      */
     protected $quoteResponseExpander;
 
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToCartFacadeInterface $cartFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResolverInterface $quoteResolver
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface $quoteResponseExpander
-     */
     public function __construct(
         PersistentCartToCartFacadeInterface $cartFacade,
         QuoteResolverInterface $quoteResolver,
@@ -57,11 +51,6 @@ class QuoteLocker implements QuoteLockerInterface
         $this->quoteResponseExpander = $quoteResponseExpander;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function resetQuoteLock(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($quoteTransfer) {
@@ -69,11 +58,6 @@ class QuoteLocker implements QuoteLockerInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function executeResetQuoteLockTransaction(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteTransfer->requireCustomer();

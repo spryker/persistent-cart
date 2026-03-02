@@ -27,11 +27,6 @@ class QuoteMerger implements QuoteMergerInterface
         $this->cartAddItemStrategyPlugins = $cartAddItemStrategyPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteMergeRequestTransfer $quoteMergeRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function merge(QuoteMergeRequestTransfer $quoteMergeRequestTransfer): QuoteTransfer
     {
         $targetQuote = clone $quoteMergeRequestTransfer->getTargetQuote();
@@ -40,12 +35,6 @@ class QuoteMerger implements QuoteMergerInterface
         return $targetQuote;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $targetQuote
-     * @param \Generated\Shared\Transfer\QuoteTransfer $sourceQuote
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function mergeItems(QuoteTransfer $targetQuote, QuoteTransfer $sourceQuote): QuoteTransfer
     {
         foreach ($sourceQuote->getItems() as $itemTransfer) {
@@ -55,12 +44,6 @@ class QuoteMerger implements QuoteMergerInterface
         return $targetQuote;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     protected function addItem(ItemTransfer $itemTransfer, QuoteTransfer $quoteTransfer): void
     {
         foreach ($this->cartAddItemStrategyPlugins as $quoteMergeItemStrategyPlugin) {
@@ -99,11 +82,6 @@ class QuoteMerger implements QuoteMergerInterface
         return $cartIndex;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return string
-     */
     protected function getItemIdentifier(ItemTransfer $itemTransfer): string
     {
         return $itemTransfer->getGroupKey() ?: $itemTransfer->getSku();

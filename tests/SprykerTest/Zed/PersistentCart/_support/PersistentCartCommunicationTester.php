@@ -29,11 +29,6 @@ class PersistentCartCommunicationTester extends Actor
 {
     use _generated\PersistentCartCommunicationTesterActions;
 
-    /**
-     * @param int $idQuote
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getQuoteFromPersistenceByIdQuote(int $idQuote): QuoteTransfer
     {
         $quoteEntity = $this->getQuoteQuery()
@@ -43,9 +38,6 @@ class PersistentCartCommunicationTester extends Actor
         return (new QuoteTransfer())->fromArray($quoteEntity->toArray(), true);
     }
 
-    /**
-     * @return \Orm\Zed\Quote\Persistence\SpyQuoteQuery
-     */
     protected function getQuoteQuery(): SpyQuoteQuery
     {
         return SpyQuoteQuery::create();

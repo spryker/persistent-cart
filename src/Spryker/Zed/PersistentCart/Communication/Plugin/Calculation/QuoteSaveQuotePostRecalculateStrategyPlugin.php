@@ -70,9 +70,6 @@ class QuoteSaveQuotePostRecalculateStrategyPlugin extends AbstractPlugin impleme
         return true;
     }
 
-    /**
-     * @return bool
-     */
     protected function isStorageStrategyDatabase(): bool
     {
         $storageStrategy = $this->getFactory()
@@ -82,11 +79,6 @@ class QuoteSaveQuotePostRecalculateStrategyPlugin extends AbstractPlugin impleme
         return $storageStrategy === static::STORAGE_STRATEGY_DATABASE;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteUpdateRequestTransfer
-     */
     protected function prepareQuoteUpdateRequestTransfer(QuoteTransfer $quoteTransfer): QuoteUpdateRequestTransfer
     {
         $quoteUpdateRequestAttributesTransfer = (new QuoteUpdateRequestAttributesTransfer())

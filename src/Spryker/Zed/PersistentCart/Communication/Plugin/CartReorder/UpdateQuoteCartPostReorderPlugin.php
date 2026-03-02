@@ -47,11 +47,6 @@ class UpdateQuoteCartPostReorderPlugin extends AbstractPlugin implements CartPos
         return $cartReorderTransfer->setQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteUpdateRequestTransfer
-     */
     protected function createQuoteUpdateRequestTransfer(QuoteTransfer $quoteTransfer): QuoteUpdateRequestTransfer
     {
         return (new QuoteUpdateRequestTransfer())

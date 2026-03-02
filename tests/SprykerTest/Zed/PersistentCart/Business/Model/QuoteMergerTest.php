@@ -49,9 +49,6 @@ class QuoteMergerTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -61,9 +58,6 @@ class QuoteMergerTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testMergeSourceAndTargetQuote(): void
     {
         // Assign
@@ -89,9 +83,6 @@ class QuoteMergerTest extends Unit
         $this->assertSame(1, $newItem->getQuantity());
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteMergeRequestTransfer
-     */
     protected function createQuoteMergeRequestTransfer(): QuoteMergeRequestTransfer
     {
         return (new QuoteMergeRequestTransfer())

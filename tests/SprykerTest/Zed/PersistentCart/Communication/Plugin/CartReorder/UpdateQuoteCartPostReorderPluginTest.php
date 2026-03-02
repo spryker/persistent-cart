@@ -44,9 +44,6 @@ class UpdateQuoteCartPostReorderPluginTest extends Unit
      */
     protected PersistentCartCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testShouldPersistChangesForReorderedCart(): void
     {
         // Arrange
@@ -65,9 +62,6 @@ class UpdateQuoteCartPostReorderPluginTest extends Unit
         $this->assertSame(static::CART_NAME, $this->tester->getQuoteFromPersistenceByIdQuote($idQuote)->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testShouldNotPersistChangesForReorderedCart(): void
     {
         // Arrange
@@ -88,9 +82,6 @@ class UpdateQuoteCartPostReorderPluginTest extends Unit
         $this->assertNotSame(static::CART_NAME, $this->tester->getQuoteFromPersistenceByIdQuote($idQuote)->getName());
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function createCustomerQuote(): QuoteTransfer
     {
         return $this->tester->havePersistentQuote([

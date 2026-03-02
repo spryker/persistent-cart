@@ -37,12 +37,6 @@ class QuoteWriter implements QuoteWriterInterface
      */
     protected $quoteResolver;
 
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface $quoteResponseExpander
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResolverInterface $quoteResolver
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteItemOperationInterface $quoteItemOperation
-     */
     public function __construct(
         PersistentCartToQuoteFacadeInterface $quoteFacade,
         QuoteResponseExpanderInterface $quoteResponseExpander,
@@ -55,11 +49,6 @@ class QuoteWriter implements QuoteWriterInterface
         $this->quoteResolver = $quoteResolver;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function createQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteTransfer->setCustomerReference($quoteTransfer->getCustomer()->getCustomerReference());
@@ -67,11 +56,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->quoteResponseExpander->expand($this->quoteFacade->createQuote($quoteTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function createQuoteWithReloadedItems(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->quoteFacade->createQuote($quoteTransfer);
@@ -82,11 +66,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->quoteResponseExpander->expand($quoteResponseTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function updateQuote(QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->quoteResolver->resolveCustomerQuote(
@@ -102,11 +81,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->quoteResponseExpander->expand($this->quoteFacade->updateQuote($quoteTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function updateAndReloadQuote(QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->quoteResolver->resolveCustomerQuote(
@@ -132,11 +106,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->quoteItemOperation->reloadItems($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function replaceQuoteByCustomerAndStore(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->quoteFacade->findQuoteByCustomerAndStore(
@@ -153,11 +122,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->quoteFacade->updateQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer
-     *
-     * @return bool
-     */
     protected function hasCustomerWritePermission(QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer): bool
     {
         $companyUserId = $this->findCompanyUserId($quoteUpdateRequestTransfer);
@@ -169,11 +133,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $this->can('WriteSharedCartPermissionPlugin', $companyUserId, $quoteUpdateRequestTransfer->getIdQuote());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer
-     *
-     * @return int|null
-     */
     protected function findCompanyUserId(QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer): ?int
     {
         $companyUserTransfer = $quoteUpdateRequestTransfer
@@ -183,11 +142,6 @@ class QuoteWriter implements QuoteWriterInterface
         return $companyUserTransfer ? $companyUserTransfer->getIdCompanyUser() : null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteOwner(QuoteTransfer $quoteTransfer): bool
     {
         return $quoteTransfer->requireCustomer()

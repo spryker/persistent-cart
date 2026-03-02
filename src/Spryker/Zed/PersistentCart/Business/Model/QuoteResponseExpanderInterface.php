@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\QuoteResponseTransfer;
 
 interface QuoteResponseExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function expand(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer;
 }

@@ -70,9 +70,6 @@ class PersistentCartFacadeTest extends Unit
      */
     protected $originalQuoteTransfer;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -84,9 +81,6 @@ class PersistentCartFacadeTest extends Unit
         ]);
     }
 
-    /**
-     * @return void
-     */
     public function testReplaceItemWillSetSuccessFalseWhenItemToBeReplacedDoesNotExistInQuote(): void
     {
         // Arrange
@@ -113,9 +107,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityDecreasesQuantityForProvidedItems(): void
     {
         // Arrange
@@ -152,9 +143,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityIncreasesQuantityForProvidedItems(): void
     {
         // Arrange
@@ -191,9 +179,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityChangesQuantityForProvidedItems(): void
     {
         // Arrange
@@ -231,9 +216,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityChangesQuantityForEmptyPersistentCartChangeTransfer(): void
     {
         // Arrange
@@ -268,9 +250,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityChangesQuantityForSamePersistentCartChangeTransfer(): void
     {
         // Arrange
@@ -308,9 +287,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testReplaceItemShouldReplaceItem(): void
     {
         // Arrange
@@ -337,9 +313,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityUpdatesQuantityWithoutIncreasing(): void
     {
         // Arrange
@@ -376,9 +349,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateQuantityUpdatesQuantityWithoutDecreasing(): void
     {
         // Arrange
@@ -416,9 +386,6 @@ class PersistentCartFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testShouldExecuteQuotePostMergePlugins(): void
     {
         // Assert
@@ -442,9 +409,6 @@ class PersistentCartFacadeTest extends Unit
         $this->tester->getFacade()->updateQuantity($persistentCartChangeTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testShouldNotExecuteQuotePostMergePlugins(): void
     {
         // Assert
@@ -466,11 +430,6 @@ class PersistentCartFacadeTest extends Unit
         $this->tester->getFacade()->updateQuantity($persistentCartChangeTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function createCustomerQuote(?CustomerTransfer $customerTransfer = null): QuoteTransfer
     {
         return $this->tester->havePersistentQuote([
@@ -524,11 +483,6 @@ class PersistentCartFacadeTest extends Unit
         return $cartPreCheckPluginInterfaceMock;
     }
 
-    /**
-     * @param bool $expectExec
-     *
-     * @return \Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuotePostMergePluginInterface
-     */
     protected function createQuotePostMergePluginMock(bool $expectExec): QuotePostMergePluginInterface
     {
         $quotePostMergePluginMock = $this

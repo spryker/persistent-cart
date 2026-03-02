@@ -17,19 +17,10 @@ use Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInte
 
 class CartReorderProvider implements CartReorderProviderInterface
 {
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteWriterInterface $quoteWriter
-     */
     public function __construct(protected PersistentCartToQuoteFacadeInterface $quoteFacade, protected QuoteWriterInterface $quoteWriter)
     {
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CartReorderRequestTransfer $cartReorderRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getQuoteForCartReorder(CartReorderRequestTransfer $cartReorderRequestTransfer): QuoteTransfer
     {
         $customerTransfer = (new CustomerTransfer())
@@ -45,11 +36,6 @@ class CartReorderProvider implements CartReorderProviderInterface
             ->setItems(new ArrayObject());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer|null
-     */
     protected function findCustomerQuote(CustomerTransfer $customerTransfer): ?QuoteTransfer
     {
         $quoteCriteriaFilterTransfer = (new QuoteCriteriaFilterTransfer())
@@ -65,11 +51,6 @@ class CartReorderProvider implements CartReorderProviderInterface
         return $quoteCollectionTransfer->getQuotes()->getIterator()->current();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function createCustomerQuote(CustomerTransfer $customerTransfer): QuoteTransfer
     {
         $quoteTransfer = (new QuoteTransfer())

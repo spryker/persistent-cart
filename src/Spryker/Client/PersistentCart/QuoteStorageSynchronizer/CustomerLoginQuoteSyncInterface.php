@@ -12,17 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface CustomerLoginQuoteSyncInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return void
-     */
     public function syncQuoteForCustomer(CustomerTransfer $customerTransfer): void;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function syncQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

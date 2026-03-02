@@ -42,13 +42,6 @@ class QuoteDeleter implements QuoteDeleterInterface
      */
     protected $customerClient;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface $zedRequestClient
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToCustomerClientInterface $customerClient
-     * @param \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface $persistentCartStub
-     * @param \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface $quoteUpdatePluginExecutor
-     */
     public function __construct(
         PersistentCartToQuoteClientInterface $quoteClient,
         PersistentCartToZedRequestClientInterface $zedRequestClient,
@@ -63,11 +56,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         $this->customerClient = $customerClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function deleteQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteTransfer->setCustomer($this->customerClient->getCustomer());
@@ -82,11 +70,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function executeUpdateQuotePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         return $this->quoteUpdatePluginExecutor->executePlugins($quoteResponseTransfer);

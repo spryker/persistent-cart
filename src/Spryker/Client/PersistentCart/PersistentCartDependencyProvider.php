@@ -52,11 +52,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
      */
     public const PLUGINS_CHANGE_REQUEST_EXTEND = 'PLUGINS_CHANGE_REQUEST_EXTEND';
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     public function provideServiceLayerDependencies(Container $container): Container
     {
         $container = $this->addCustomerClient($container);
@@ -70,11 +65,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addQuoteClient(Container $container): Container
     {
         $container->set(static::CLIENT_QUOTE, function (Container $container) {
@@ -84,11 +74,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addCustomerClient(Container $container): Container
     {
         $container->set(static::CLIENT_CUSTOMER, function (Container $container) {
@@ -98,11 +83,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addZedRequestClient(Container $container): Container
     {
         $container->set(static::CLIENT_ZED_REQUEST, function (Container $container) {
@@ -112,11 +92,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addQuoteUpdatePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_QUOTE_UPDATE, function (Container $container) {
@@ -139,11 +114,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addChangeRequestExtendPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_CHANGE_REQUEST_EXTEND, function (Container $container) {
@@ -153,11 +123,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addQuotePersistPlugin(Container $container): Container
     {
         $container->set(static::PLUGIN_QUOTE_PERSIST, function (Container $container) {
@@ -191,9 +156,6 @@ class PersistentCartDependencyProvider extends AbstractDependencyProvider
         return [];
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuotePersistPluginInterface
-     */
     protected function getQuotePersistPlugin(): QuotePersistPluginInterface
     {
         return new PersistentCartQuotePersistPlugin();

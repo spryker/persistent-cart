@@ -31,10 +31,6 @@ class QuoteWriter implements QuoteWriterInterface
      */
     protected $quotePersistPlugin;
 
-    /**
-     * @param \Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuotePersistPluginInterface $quotePersistPlugin
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     */
     public function __construct(
         QuotePersistPluginInterface $quotePersistPlugin,
         PersistentCartToQuoteClientInterface $quoteClient
@@ -43,11 +39,6 @@ class QuoteWriter implements QuoteWriterInterface
         $this->quoteClient = $quoteClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function persist(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         if ($this->quoteClient->getStorageStrategy() !== static::STORAGE_STRATEGY_DATABASE) {

@@ -38,9 +38,6 @@ use Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuotePersistPluginI
  */
 class PersistentCartFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteWriter\QuoteCreatorInterface
-     */
     public function createQuoteCreator(): QuoteCreatorInterface
     {
         return new QuoteCreator(
@@ -51,9 +48,6 @@ class PersistentCartFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteWriter\QuoteUpdaterInterface
-     */
     public function createQuoteUpdater(): QuoteUpdaterInterface
     {
         return new QuoteUpdater(
@@ -63,9 +57,6 @@ class PersistentCartFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteWriter\QuoteWriterInterface
-     */
     public function createQuoteWriter(): QuoteWriterInterface
     {
         return new QuoteWriter(
@@ -74,9 +65,6 @@ class PersistentCartFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteWriter\QuoteDeleterInterface
-     */
     public function createQuoteDeleter(): QuoteDeleterInterface
     {
         return new QuoteDeleter(
@@ -88,41 +76,26 @@ class PersistentCartFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface
-     */
     public function getQuoteClient(): PersistentCartToQuoteClientInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::CLIENT_QUOTE);
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface
-     */
     public function getZedRequestClient(): PersistentCartToZedRequestClientInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::CLIENT_ZED_REQUEST);
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface
-     */
     public function createZedPersistentCartStub(): PersistentCartStubInterface
     {
         return new PersistentCartStub($this->getZedRequestClient());
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToCustomerClientInterface
-     */
     public function getCustomerClient(): PersistentCartToCustomerClientInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::CLIENT_CUSTOMER);
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface
-     */
     public function createQuoteUpdatePluginExecutor(): QuoteUpdatePluginExecutorInterface
     {
         return new QuoteUpdatePluginExecutor($this->getQuoteUpdatePlugins());
@@ -133,17 +106,11 @@ class PersistentCartFactory extends AbstractFactory
         return new QuoteUpdatePluginExecutor($this->getQuoteUpdatePluginsForInsideCartOperations());
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\ChangeRequestExtendPluginExecutorInterface
-     */
     public function createChangeRequestExtendPluginExecutor(): ChangeRequestExtendPluginExecutorInterface
     {
         return new ChangeRequestExtendPluginExecutor($this->getChangeRequestExtendPlugins());
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteStorageSynchronizer\CustomerLoginQuoteSyncInterface
-     */
     public function createCustomerLoginQuoteSync(): CustomerLoginQuoteSyncInterface
     {
         return new CustomerLoginQuoteSync(
@@ -155,9 +122,6 @@ class PersistentCartFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\QuoteStorageSynchronizer\CustomerQuoteCleanerInterface
-     */
     public function createCustomerQuoteCleaner(): CustomerQuoteCleanerInterface
     {
         return new CustomerQuoteCleaner(
@@ -192,17 +156,11 @@ class PersistentCartFactory extends AbstractFactory
         return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGINS_CHANGE_REQUEST_EXTEND);
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCartExtension\Dependency\Plugin\QuotePersistPluginInterface
-     */
     public function getQuotePersistPlugin(): QuotePersistPluginInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGIN_QUOTE_PERSIST);
     }
 
-    /**
-     * @return \Spryker\Client\PersistentCart\GuestCartCustomerReferenceGenerator\GuestCartCustomerReferenceGeneratorInterface
-     */
     public function createGuestCartCustomerReferenceGenerator(): GuestCartCustomerReferenceGeneratorInterface
     {
         return new GuestCartCustomerReferenceGenerator($this->getConfig());

@@ -41,9 +41,6 @@ use Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteItemFinderPluginI
  */
 class PersistentCartBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\CartOperationInterface
-     */
     public function createCartOperation(): CartOperationInterface
     {
         return new CartOperation(
@@ -68,9 +65,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Replacer\CartItemReplacerInterface
-     */
     public function createCartItemOperation(): CartItemReplacerInterface
     {
         return new CartItemReplacer(
@@ -81,9 +75,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteItemOperationInterface
-     */
     public function createQuoteItemOperation(): QuoteItemOperationInterface
     {
         return new QuoteItemOperation(
@@ -106,9 +97,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteResolverInterface
-     */
     public function createQuoteResolver(): QuoteResolverInterface
     {
         return new QuoteResolver(
@@ -120,9 +108,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteStorageSynchronizerInterface
-     */
     public function createQuoteStorageSynchronizer(): QuoteStorageSynchronizerInterface
     {
         return new QuoteStorageSynchronizer(
@@ -134,9 +119,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteDeleterInterface
-     */
     public function createQuoteDeleter(): QuoteDeleterInterface
     {
         return new QuoteDeleter(
@@ -146,9 +128,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteWriterInterface
-     */
     public function createQuoteWriter(): QuoteWriterInterface
     {
         return new QuoteWriter(
@@ -159,9 +138,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface
-     */
     public function createQuoteResponseExpander(): QuoteResponseExpanderInterface
     {
         return new QuoteResponseExpander(
@@ -176,9 +152,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\CartChangeRequestExpanderInterface
-     */
     public function createCartChangeRequestExpander(): CartChangeRequestExpanderInterface
     {
         return new CartChangeRequestExpander(
@@ -186,9 +159,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Model\QuoteMergerInterface
-     */
     public function createQuoteMerger(): QuoteMergerInterface
     {
         return new QuoteMerger(
@@ -196,9 +166,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Locker\QuoteLockerInterface
-     */
     public function createQuoteLocker(): QuoteLockerInterface
     {
         return new QuoteLocker(
@@ -209,9 +176,6 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Business\Provider\CartReorderProviderInterface
-     */
     public function createCartReorderProvider(): CartReorderProviderInterface
     {
         return new CartReorderProvider(
@@ -244,17 +208,11 @@ class PersistentCartBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(PersistentCartDependencyProvider::FACADE_QUOTE);
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToStoreFacadeInterface
-     */
     public function getStoreFacade(): PersistentCartToStoreFacadeInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::FACADE_STORE);
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteItemFinderPluginInterface
-     */
     protected function getQuoteItemFinderPlugin(): QuoteItemFinderPluginInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::PLUGIN_QUOTE_ITEM_FINDER);

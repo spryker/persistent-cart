@@ -24,11 +24,6 @@ class CartChangeRequestExpander implements CartChangeRequestExpanderInterface
         $this->removeItemRequestExpanderPlugins = $removeItemRequestExpanderPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer
-     *
-     * @return \Generated\Shared\Transfer\CartChangeTransfer
-     */
     public function removeItemRequestExpand(CartChangeTransfer $cartChangeTransfer): CartChangeTransfer
     {
         foreach ($this->removeItemRequestExpanderPlugins as $changeRequestExpanderPlugin) {

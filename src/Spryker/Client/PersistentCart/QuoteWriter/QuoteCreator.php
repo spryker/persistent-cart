@@ -36,12 +36,6 @@ class QuoteCreator implements QuoteCreatorInterface
      */
     protected $zedRequestClient;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface $zedRequestClient
-     * @param \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface $persistentCartStub
-     * @param \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface $quoteUpdatePluginExecutor
-     */
     public function __construct(
         PersistentCartToQuoteClientInterface $quoteClient,
         PersistentCartToZedRequestClientInterface $zedRequestClient,
@@ -54,11 +48,6 @@ class QuoteCreator implements QuoteCreatorInterface
         $this->zedRequestClient = $zedRequestClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function createQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->persistentCartStub->createQuote($quoteTransfer);
@@ -67,11 +56,6 @@ class QuoteCreator implements QuoteCreatorInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function createQuoteWithReloadedItems(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->persistentCartStub->createQuoteWithReloadedItems($quoteTransfer);
@@ -80,11 +64,6 @@ class QuoteCreator implements QuoteCreatorInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function processQuoteResponse(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         if ($quoteResponseTransfer->getIsSuccessful()) {
@@ -97,11 +76,6 @@ class QuoteCreator implements QuoteCreatorInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function executeUpdateQuotePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         return $this->quoteUpdatePluginExecutor->executePlugins($quoteResponseTransfer);

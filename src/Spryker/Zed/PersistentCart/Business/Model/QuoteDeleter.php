@@ -50,11 +50,6 @@ class QuoteDeleter implements QuoteDeleterInterface
      */
     protected $messengerFacade;
 
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface $quoteResponseExpander
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToMessengerFacadeInterface $messengerFacade
-     */
     public function __construct(
         PersistentCartToQuoteFacadeInterface $quoteFacade,
         QuoteResponseExpanderInterface $quoteResponseExpander,
@@ -65,11 +60,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         $this->messengerFacade = $messengerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function deleteQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         if (!$this->isQuoteDeleteAllowed($quoteTransfer, $quoteTransfer->getCustomer())) {
@@ -88,12 +78,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteDeleteAllowed(QuoteTransfer $quoteTransfer, CustomerTransfer $customerTransfer): bool
     {
         if (!$this->isDeleteAllowedForCustomer($quoteTransfer, $customerTransfer)) {
@@ -114,9 +98,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         return true;
     }
 
-    /**
-     * @return void
-     */
     protected function addSuccessMessage(): void
     {
         $messageTransfer = new MessageTransfer();
@@ -124,12 +105,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         $this->messengerFacade->addSuccessMessage($messageTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return bool
-     */
     protected function isLastCustomerQuote(QuoteTransfer $quoteTransfer, CustomerTransfer $customerTransfer): bool
     {
         $quoteCriteriaFilterTransfer = new QuoteCriteriaFilterTransfer();
@@ -148,12 +123,6 @@ class QuoteDeleter implements QuoteDeleterInterface
         return $customerQuoteQuantity === 0;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return bool
-     */
     protected function isDeleteAllowedForCustomer(QuoteTransfer $quoteTransfer, CustomerTransfer $customerTransfer): bool
     {
         return $quoteTransfer->getCustomerReference() === $customerTransfer->getCustomerReference()

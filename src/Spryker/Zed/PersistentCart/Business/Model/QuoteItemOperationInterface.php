@@ -36,11 +36,6 @@ interface QuoteItemOperationInterface
      */
     public function removeItems(array $itemTransferList, QuoteTransfer $quoteTransfer): QuoteResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function reloadItems(QuoteTransfer $quoteTransfer): QuoteResponseTransfer;
 
     /**

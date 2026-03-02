@@ -16,19 +16,11 @@ class GuestCartCustomerReferenceGenerator implements GuestCartCustomerReferenceG
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\PersistentCartConfig $config
-     */
     public function __construct(PersistentCartConfig $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @param string $customerReference
-     *
-     * @return string
-     */
     public function generateGuestCartCustomerReference(string $customerReference): string
     {
         return $this->config->getPersistentCartAnonymousPrefix() . $customerReference;

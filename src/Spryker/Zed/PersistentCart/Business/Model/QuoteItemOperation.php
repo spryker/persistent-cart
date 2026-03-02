@@ -52,13 +52,6 @@ class QuoteItemOperation implements QuoteItemOperationInterface
      */
     protected $messengerFacade;
 
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToCartFacadeInterface $cartFacade
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\CartChangeRequestExpanderInterface $cartChangeRequestExpander
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface $quoteResponseExpander
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToMessengerFacadeInterface $messengerFacade
-     */
     public function __construct(
         PersistentCartToCartFacadeInterface $cartFacade,
         PersistentCartToQuoteFacadeInterface $quoteFacade,
@@ -144,11 +137,6 @@ class QuoteItemOperation implements QuoteItemOperationInterface
         return $this->quoteResponseExpander->expand($mergedQuoteResponseTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function reloadItems(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = (new QuoteResponseTransfer())
@@ -181,12 +169,6 @@ class QuoteItemOperation implements QuoteItemOperationInterface
         return $this->quoteResponseExpander->expand($quoteResponseTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteWriteAllowed(QuoteTransfer $quoteTransfer, CustomerTransfer $customerTransfer): bool
     {
         if (
@@ -228,11 +210,6 @@ class QuoteItemOperation implements QuoteItemOperationInterface
         return $cartChangeTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function createQuoteResponseTransfer(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         return (new QuoteResponseTransfer())
@@ -241,12 +218,6 @@ class QuoteItemOperation implements QuoteItemOperationInterface
             ->setCustomer($quoteTransfer->getCustomer());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $updatedQuoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function mergeQuoteResponseTransfers(
         QuoteResponseTransfer $quoteResponseTransfer,
         QuoteResponseTransfer $updatedQuoteResponseTransfer

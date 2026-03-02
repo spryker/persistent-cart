@@ -53,13 +53,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
      */
     protected $storeFacade;
 
-    /**
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToCartFacadeInterface $cartFacade
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteResponseExpanderInterface $quoteResponseExpander
-     * @param \Spryker\Zed\PersistentCart\Business\Model\QuoteMergerInterface $quoteMerger
-     * @param \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToStoreFacadeInterface $storeFacade
-     */
     public function __construct(
         PersistentCartToCartFacadeInterface $cartFacade,
         PersistentCartToQuoteFacadeInterface $quoteFacade,
@@ -74,11 +67,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
         $this->storeFacade = $storeFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteSyncRequestTransfer $quoteSyncRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function syncStorageQuote(QuoteSyncRequestTransfer $quoteSyncRequestTransfer): QuoteResponseTransfer
     {
         $this->assertDatabaseStorageStrategy();
@@ -106,11 +94,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
         return $this->quoteResponseExpander->expand($this->saveQuote($quoteTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteSyncRequestTransfer $quoteSyncRequestTransfer
-     *
-     * @return void
-     */
     protected function validateRequest(QuoteSyncRequestTransfer $quoteSyncRequestTransfer): void
     {
         $quoteSyncRequestTransfer
@@ -120,12 +103,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
         $quoteSyncRequestTransfer->getCustomerTransfer()->requireCustomerReference();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $targetQuoteTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $sourceQuoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function mergeQuotes(QuoteTransfer $targetQuoteTransfer, QuoteTransfer $sourceQuoteTransfer): QuoteTransfer
     {
         if (!count($targetQuoteTransfer->getItems())) {
@@ -146,11 +123,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
         return $targetQuoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function saveQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         if ($quoteTransfer->getIdQuote()) {
@@ -177,12 +149,6 @@ class QuoteStorageSynchronizer implements QuoteStorageSynchronizerInterface
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function getDefaultCustomerQuote(
         CustomerTransfer $customerTransfer,
         StoreTransfer $storeTransfer

@@ -24,11 +24,6 @@ class QuoteUpdatePluginExecutor implements QuoteUpdatePluginExecutorInterface
         $this->quoteUpdatePlugins = $quoteUpdatePlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function executePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         foreach ($this->quoteUpdatePlugins as $quoteUpdatePlugin) {

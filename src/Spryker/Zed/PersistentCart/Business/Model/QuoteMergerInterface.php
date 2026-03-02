@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface QuoteMergerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteMergeRequestTransfer $quoteMergeRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function merge(QuoteMergeRequestTransfer $quoteMergeRequestTransfer): QuoteTransfer;
 }

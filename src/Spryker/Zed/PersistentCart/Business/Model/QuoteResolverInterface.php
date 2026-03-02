@@ -13,13 +13,6 @@ use Generated\Shared\Transfer\QuoteUpdateRequestAttributesTransfer;
 
 interface QuoteResolverInterface
 {
-    /**
-     * @param int|null $idQuote
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestAttributesTransfer|null $quoteUpdateRequestAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function resolveCustomerQuote(
         ?int $idQuote,
         CustomerTransfer $customerTransfer,

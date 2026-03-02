@@ -46,9 +46,6 @@ class GetQuoteForCartReorderTest extends Unit
      */
     protected PersistentCartBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -59,9 +56,6 @@ class GetQuoteForCartReorderTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testShouldReturnQuoteForCartReorderWhenCustomerDoesNotHaveQuote(): void
     {
         // Arrange
@@ -77,9 +71,6 @@ class GetQuoteForCartReorderTest extends Unit
         $this->assertEmpty($quoteTransfer->getItems());
     }
 
-    /**
-     * @return void
-     */
     public function testShouldThrowExceptionWhenCustomerReferenceNotSet(): void
     {
         // Assert
@@ -90,9 +81,6 @@ class GetQuoteForCartReorderTest extends Unit
         $this->tester->getFacade()->getQuoteForCartReorder(new CartReorderRequestTransfer());
     }
 
-    /**
-     * @return void
-     */
     public function testShouldReturnQuoteForCartReorderWhenCustomerHasDefaultQuote(): void
     {
         // Arrange
@@ -118,9 +106,6 @@ class GetQuoteForCartReorderTest extends Unit
         $this->assertEmpty($quoteTransfer->getItems());
     }
 
-    /**
-     * @return void
-     */
     public function testShouldReturnQuoteForCartReorderWhenCustomerHasQuote(): void
     {
         // Arrange

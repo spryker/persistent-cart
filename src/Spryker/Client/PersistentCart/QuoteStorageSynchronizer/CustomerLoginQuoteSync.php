@@ -51,13 +51,6 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
      */
     protected $customerClient;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface $persistentCartStub
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     * @param \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface $quoteUpdatePluginExecutor
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface $zedRequestClient
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToCustomerClientInterface $customerClient
-     */
     public function __construct(
         PersistentCartStubInterface $persistentCartStub,
         PersistentCartToQuoteClientInterface $quoteClient,
@@ -72,11 +65,6 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
         $this->customerClient = $customerClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return void
-     */
     public function syncQuoteForCustomer(CustomerTransfer $customerTransfer): void
     {
         if ($this->isDatabaseStorageStrategy($this->quoteClient->getStorageStrategy())) {
@@ -96,11 +84,6 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
         $this->executeQuote($quoteResponseTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function syncQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if ($this->isQuoteNotSynchronizable($quoteTransfer)) {
@@ -117,21 +100,11 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
         return $quoteResponseTransfer->getQuoteTransfer();
     }
 
-    /**
-     * @param string $strategyName
-     *
-     * @return bool
-     */
     protected function isDatabaseStorageStrategy(string $strategyName): bool
     {
         return $strategyName !== static::STORAGE_STRATEGY_DATABASE;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteNotSynchronizable(QuoteTransfer $quoteTransfer): bool
     {
         return $quoteTransfer->getIdQuote()
@@ -139,12 +112,6 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
             || $this->isDatabaseStorageStrategy($this->quoteClient->getStorageStrategy());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function getQuoteResponseTransfer(
         QuoteTransfer $quoteTransfer,
         CustomerTransfer $customerTransfer
@@ -156,11 +123,6 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
         return $this->persistentCartStub->syncStorageQuote($quoteSyncRequestTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return void
-     */
     protected function executeQuote(QuoteResponseTransfer $quoteResponseTransfer): void
     {
         $this->quoteClient->setQuote($quoteResponseTransfer->getQuoteTransfer());

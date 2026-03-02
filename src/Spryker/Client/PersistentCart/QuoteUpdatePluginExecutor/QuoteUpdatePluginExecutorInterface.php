@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\QuoteResponseTransfer;
 
 interface QuoteUpdatePluginExecutorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function executePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer;
 }

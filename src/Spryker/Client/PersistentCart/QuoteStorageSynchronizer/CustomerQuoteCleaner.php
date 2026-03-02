@@ -44,12 +44,6 @@ class CustomerQuoteCleaner implements CustomerQuoteCleanerInterface
      */
     protected $zedRequestClient;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface $persistentCartStub
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     * @param \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface $quoteUpdatePluginExecutor
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToZedRequestClientInterface $zedRequestClient
-     */
     public function __construct(
         PersistentCartStubInterface $persistentCartStub,
         PersistentCartToQuoteClientInterface $quoteClient,
@@ -62,11 +56,6 @@ class CustomerQuoteCleaner implements CustomerQuoteCleanerInterface
         $this->zedRequestClient = $zedRequestClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return void
-     */
     public function reloadQuoteForCustomer(CustomerTransfer $customerTransfer): void
     {
         $this->quoteClient->setQuote(new QuoteTransfer());

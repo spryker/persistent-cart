@@ -480,9 +480,6 @@ class DatabaseQuoteStorageStrategy extends AbstractPlugin implements QuoteStorag
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PersistentCartChangeTransfer
-     */
     protected function createPersistentCartChangeTransfer(): PersistentCartChangeTransfer
     {
         $persistentQuoteChange = new PersistentCartChangeTransfer();
@@ -495,9 +492,6 @@ class DatabaseQuoteStorageStrategy extends AbstractPlugin implements QuoteStorag
         return $persistentQuoteChange;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PersistentItemReplaceTransfer
-     */
     protected function createPersistentItemReplaceTransfer(): PersistentItemReplaceTransfer
     {
         $persistentItemReplaceTransfer = new PersistentItemReplaceTransfer();
@@ -510,9 +504,6 @@ class DatabaseQuoteStorageStrategy extends AbstractPlugin implements QuoteStorag
         return $persistentItemReplaceTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PersistentCartChangeQuantityTransfer
-     */
     protected function createPersistentCartChangeQuantityTransfer(): PersistentCartChangeQuantityTransfer
     {
         $persistentQuoteChange = new PersistentCartChangeQuantityTransfer();
@@ -552,11 +543,6 @@ class DatabaseQuoteStorageStrategy extends AbstractPlugin implements QuoteStorag
         return $sessionQuoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function executeUpdateQuotePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         return $this->getFactory()->createQuoteUpdatePluginExecutor()->executePlugins($quoteResponseTransfer);

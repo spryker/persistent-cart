@@ -72,11 +72,6 @@ class CartOperation implements CartOperationInterface
         $this->quotePostMergePlugins = $quotePostMergePlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeTransfer $persistentCartChangeTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function add(PersistentCartChangeTransfer $persistentCartChangeTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeTransfer->requireCustomer();
@@ -98,11 +93,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->addItems((array)$persistentCartChangeTransfer->getItems(), $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeTransfer $persistentCartChangeTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function addValid(PersistentCartChangeTransfer $persistentCartChangeTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeTransfer->requireCustomer();
@@ -124,11 +114,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->addValidItems((array)$persistentCartChangeTransfer->getItems(), $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeTransfer $persistentCartChangeTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function remove(PersistentCartChangeTransfer $persistentCartChangeTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeTransfer->requireCustomer();
@@ -157,11 +142,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->removeItems($itemTransferList, $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function changeItemQuantity(PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeQuantityTransfer->requireCustomer();
@@ -210,11 +190,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->addItems([$changeItemTransfer], $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeTransfer $persistentCartChangeTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function updateQuantity(PersistentCartChangeTransfer $persistentCartChangeTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeTransfer->requireCustomer();
@@ -347,11 +322,6 @@ class CartOperation implements CartOperationInterface
         return $itemsToRemove;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function decreaseItemQuantity(PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeQuantityTransfer->requireCustomer();
@@ -382,11 +352,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->removeItems([$itemTransfer], $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function increaseItemQuantity(PersistentCartChangeQuantityTransfer $persistentCartChangeQuantityTransfer): QuoteResponseTransfer
     {
         $persistentCartChangeQuantityTransfer->requireCustomer();
@@ -417,11 +382,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->addItems([$itemTransfer], $quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function reloadItems(QuoteTransfer $quoteTransfer): QuoteResponseTransfer
     {
         $quoteTransfer->requireCustomer();
@@ -464,12 +424,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteItemOperation->validate($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $persistentQuoteTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer|null $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function mergeQuotes(QuoteTransfer $persistentQuoteTransfer, ?QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if (!$quoteTransfer) {
@@ -484,23 +438,11 @@ class CartOperation implements CartOperationInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer|null
-     */
     protected function findItemInQuote(ItemTransfer $itemTransfer, QuoteTransfer $quoteTransfer): ?ItemTransfer
     {
         return $this->itemFinderPlugin->findItem($quoteTransfer, $itemTransfer->getSku(), $itemTransfer->getGroupKey());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function createQuoteItemNotFoundResult(QuoteTransfer $quoteTransfer, CustomerTransfer $customerTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = new QuoteResponseTransfer();
@@ -511,12 +453,6 @@ class CartOperation implements CartOperationInterface
         return $this->quoteResponseExpander->expand($quoteResponseTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $persistentQuoteTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $currentQuoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function executeQuotePostMergePlugins(
         QuoteTransfer $persistentQuoteTransfer,
         QuoteTransfer $currentQuoteTransfer

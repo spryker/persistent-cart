@@ -9,10 +9,5 @@ namespace Spryker\Client\PersistentCart\GuestCartCustomerReferenceGenerator;
 
 interface GuestCartCustomerReferenceGeneratorInterface
 {
-    /**
-     * @param string $customerReference
-     *
-     * @return string
-     */
     public function generateGuestCartCustomerReference(string $customerReference): string;
 }

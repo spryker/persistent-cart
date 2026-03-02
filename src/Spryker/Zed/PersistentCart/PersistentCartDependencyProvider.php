@@ -68,11 +68,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_QUOTE_POST_MERGE = 'PLUGINS_QUOTE_POST_MERGE';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
@@ -91,11 +86,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
@@ -104,11 +94,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuoteFacade(Container $container): Container
     {
         $container->set(static::FACADE_QUOTE, function (Container $container) {
@@ -118,11 +103,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCartFacade(Container $container): Container
     {
         $container->set(static::FACADE_CART, function (Container $container) {
@@ -132,11 +112,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addStoreFacade(Container $container): Container
     {
         $container->set(static::FACADE_STORE, function (Container $container) {
@@ -146,11 +121,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addMessengerFacade(Container $container): Container
     {
         $container->set(static::FACADE_MESSENGER, function (Container $container) {
@@ -160,11 +130,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuoteItemFinderPlugin(Container $container): Container
     {
         $container->set(static::PLUGIN_QUOTE_ITEM_FINDER, function (Container $container) {
@@ -174,11 +139,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuoteResponseExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_QUOTE_RESPONSE_EXPANDER, function (Container $container) {
@@ -201,11 +161,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addRemoveItemsRequestExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_REMOVE_ITEMS_REQUEST_EXPANDER, function (Container $container) {
@@ -215,11 +170,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCartAddItemStrategyPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_CART_ADD_ITEM_STRATEGY, function (Container $container) {
@@ -229,11 +179,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuotePostMergePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_QUOTE_POST_MERGE, function () {
@@ -243,9 +188,6 @@ class PersistentCartDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @return \Spryker\Zed\PersistentCartExtension\Dependency\Plugin\QuoteItemFinderPluginInterface
-     */
     protected function getQuoteItemFinderPlugin(): QuoteItemFinderPluginInterface
     {
         return new SimpleProductQuoteItemFinderPlugin();

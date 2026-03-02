@@ -30,11 +30,6 @@ class QuoteUpdater implements QuoteUpdaterInterface
      */
     protected $quoteUpdatePluginExecutor;
 
-    /**
-     * @param \Spryker\Client\PersistentCart\Dependency\Client\PersistentCartToQuoteClientInterface $quoteClient
-     * @param \Spryker\Client\PersistentCart\Zed\PersistentCartStubInterface $persistentCartStub
-     * @param \Spryker\Client\PersistentCart\QuoteUpdatePluginExecutor\QuoteUpdatePluginExecutorInterface $quoteUpdatePluginExecutor
-     */
     public function __construct(
         PersistentCartToQuoteClientInterface $quoteClient,
         PersistentCartStubInterface $persistentCartStub,
@@ -45,11 +40,6 @@ class QuoteUpdater implements QuoteUpdaterInterface
         $this->quoteUpdatePluginExecutor = $quoteUpdatePluginExecutor;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function updateQuote(QuoteUpdateRequestTransfer $quoteUpdateRequestTransfer): QuoteResponseTransfer
     {
         $quoteResponseTransfer = $this->persistentCartStub->updateQuote($quoteUpdateRequestTransfer);
@@ -61,11 +51,6 @@ class QuoteUpdater implements QuoteUpdaterInterface
         return $quoteResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteResponseTransfer $quoteResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     protected function executeUpdateQuotePlugins(QuoteResponseTransfer $quoteResponseTransfer): QuoteResponseTransfer
     {
         return $this->quoteUpdatePluginExecutor->executePlugins($quoteResponseTransfer);

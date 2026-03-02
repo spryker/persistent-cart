@@ -17,9 +17,6 @@ use Spryker\Zed\PersistentCart\PersistentCartDependencyProvider;
  */
 class PersistentCartCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Spryker\Zed\PersistentCart\Dependency\Facade\PersistentCartToQuoteFacadeInterface
-     */
     public function getQuoteFacade(): PersistentCartToQuoteFacadeInterface
     {
         return $this->getProvidedDependency(PersistentCartDependencyProvider::FACADE_QUOTE);
