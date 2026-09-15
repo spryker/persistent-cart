@@ -76,6 +76,10 @@ class CustomerLoginQuoteSync implements CustomerLoginQuoteSyncInterface
             return;
         }
 
+        if (!$quoteTransfer->getItems()->count()) {
+            return;
+        }
+
         $quoteResponseTransfer = $this->getQuoteResponseTransfer($quoteTransfer, $customerTransfer);
         if (!$quoteResponseTransfer->getIsSuccessful()) {
             return;
