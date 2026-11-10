@@ -7,9 +7,9 @@
 
 namespace Spryker\Shared\PersistentCart;
 
-use Spryker\Shared\Kernel\AbstractBundleConfig;
+use Spryker\Shared\Kernel\AbstractSharedConfig;
 
-class PersistentCartConfig extends AbstractBundleConfig
+class PersistentCartConfig extends AbstractSharedConfig
 {
     /**
      * Persistent cart anonymous prefix.
